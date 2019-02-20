@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Energy Mix</title>
+	<script src="./js/bundle.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h2>Energy Mix</h2>
+		<p>Calculates UK energy sources over a selected time-period</p>
+		<label for="from">From</label>
+		<input type="date" id="from" v-model="from_date" v-on:change="joinToFrom">
+		</input>
+		<input type="time" id="from_time" v-model="from_time" v-on:change="joinToFrom">
+		</input>
+		<label for="to">to</label>
+		<input type="date" id="to" v-model="to_date" v-on:change="joinToFrom">
+		</input>
+		<input type="time" id="to_time" v-model="to_time" v-on:change="joinToFrom">
+		</input>
+		<button v-on:click="getNationalMix">Calculate</button>
+		<p v-if="nationalMix.length">
+			Showing the national grid from {{ from_actual }} to {{ to_actual }}
+		</p>
+		<GChart
+			v-if="nationalMix.length"
+			type="ColumnChart"
+			:data="chartData"
+		/>
+	</div>
+
+</body>
+</html>
